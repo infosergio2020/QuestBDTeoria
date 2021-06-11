@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  include includes/header
+  .container
+    h1= title
+    p Welcome to #{title}
+    .row 
+      .col-md-6.offset-md-3 
+        .card 
+          .card-header
+              | Seleccione una categoria y presione COMENZAR
+          .card-body 
+              form(action="/questions" method="POST") 
+                  .input-group 
+                    select(class="form-select" name="categoria") 
+                      option(selected='') Seleccione una categoria
+                      option(value="modelado") Modelado 
+                      option(value="arysql") AR y SQL
+                      option(value="seguridad") Seguridad
+                  button.btn.btn-outline-primary(type="submit") COMENZAR
+  include includes/footer

@@ -1,0 +1,50 @@
+extends ../layout
+
+block content
+    include ../includes/header
+    .container      
+        .row
+            .col-md-6.offset-md-3
+                .card
+                    if(errors)
+                        .card-header.bg-danger.text-white
+                            h1.text-center
+                                | No se pudo actualizar la pregunta                                                      
+                    else
+                        .card-header
+                            h1.text-center
+                                | Actualizar Pregunta    
+                    .card-body 
+                        form(action="/admin/"+pregunta.id+"/update" method="POST")
+                            .mb-3
+                                label.form-label Categoria
+                                select.form-select(name="categoria")
+                                    option(selected='')= pregunta.categoria
+                                    option(value='modelado') modelado
+                                    option(value='arysql') Algebra relacional y SQL
+                                    option(value='seguridad') Seguridad
+                            .mb-3
+                                label.form-label Pregunta
+                                input.form-control(type='text' name="pregunta" value=pregunta.pregunta)
+                            .mb-3.input-group
+                                input.form-control(type='text' name="opcion_1" value=pregunta.opciones[0].frase)
+                                .form-check.mx-2
+                                    input.form-check-input(type='checkbox' name="result_1" checked= pregunta.opciones[0].correcta ? true : false)
+                                    label.form-check-label opción correcta
+                            .mb-3.input-group
+                                input.form-control(type='text' name="opcion_2" value=pregunta.opciones[1].frase)
+                                .form-check.mx-2
+                                    input.form-check-input(type='checkbox' name="result_2" checked= pregunta.opciones[1].correcta ? true : false)
+                                    label.form-check-label opción correcta
+                            .mb-3.input-group
+                                input.form-control(type='text' name="opcion_3" value=pregunta.opciones[2].frase)
+                                .form-check.mx-2
+                                    input.form-check-input(type='checkbox' name="result_3" checked= pregunta.opciones[2].correcta ? true : false)
+                                    label.form-check-label opción correcta
+                            .mb-3.input-group
+                                input.form-control(type='text' name="opcion_4" value=pregunta.opciones[3].frase)
+                                .form-check.mx-2
+                                    input.form-check-input(type='checkbox' name="result_4" checked= pregunta.opciones[3].correcta ? true : false)
+                                    label.form-check-label opción correcta
+                            button.btn.btn-primary(type='submit') Crear
+    include ../includes/footer

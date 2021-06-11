@@ -1,0 +1,42 @@
+extends ../layout
+
+block content
+    include ../includes/header
+    .container
+        a.btn.btn-success(href='/admin/create') Nueva pregunta
+        br
+        br
+        table.table.bg-dark.text-white.font-weight-bold
+            thead
+                tr
+                    th(scope='col') #
+                    th(scope='col') ID
+                    th(scope='col') Categoria
+                    th(scope='col') Pregunta
+                    th(scope='col') Opcion 1
+                    th(scope='col') Opcion 2
+                    th(scope='col') Opcion 3
+                    th(scope='col') Opcion 4
+                    th(scope='col')
+                    th(scope='col')
+            tbody
+                -var count=0
+                each pregunta in Preguntas
+                    tr
+                        -count++
+                        td(scope='row')= count
+                        td(scope='row')= pregunta.id
+                        td= pregunta.categoria
+                        td= pregunta.pregunta
+                        each opcion in pregunta.opciones
+                            if(opcion.correcta)
+                                td(class= "border border-white bg-success")= opcion.frase
+                            else
+                                td= opcion.frase
+                        td
+                            a.btn.btn-secondary(href='/admin/'+pregunta.id+'/update') Editar
+                        td
+                            form.inline(method='post' action='/admin/'+pregunta.id+'/delete')
+                                input(type='hidden' name='id' value=pregunta.author)
+                                button.btn.btn-danger(type='submit' name='submit_param' value='submit_value')='Eliminar'
+    include ../includes/footer

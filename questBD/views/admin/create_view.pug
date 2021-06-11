@@ -1,0 +1,94 @@
+extends ../layout
+
+block content
+    include ../includes/header
+    .container      
+        .row
+            .col-md-6.offset-md-3
+                .card
+                    if(errors)
+                        .card-header.bg-danger.text-white
+                            h1.text-center
+                                | No se pudo crear la pregunta                                                      
+                    else
+                        .card-header
+                            h1.text-center
+                                | Crear Pregunta    
+                    .card-body 
+                        form(action="/admin/create" method="POST")
+                            .mb-3
+                                label.form-label Categoria
+                                select.form-select(name="categoria")
+                                    option(selected='')= pregunta.categoria
+                                    option(value='modelado') modelado
+                                    option(value='arysql') Algebra relacional y SQL
+                                    option(value='seguridad') Seguridad
+                            .mb-3
+                                label.form-label Pregunta
+                                if(pregunta.pregunta =='')
+                                    input.form-control(type='text' name="pregunta" value=pregunta.pregunta class="border border-3 border-danger")
+                                else
+                                    input.form-control(type='text' name="pregunta" value=pregunta.pregunta)
+
+
+                            .mb-3.input-group
+                                if(pregunta.opciones.length == 0)
+                                    input.form-control(type='text' name="opcion_1" placeholder="opcion_1")
+                                else
+                                    if(pregunta.opciones[0].frase =='')
+                                        input.form-control(type='text' name="opcion_1" value=pregunta.opciones[0].frase class="border border-3 border-danger")
+                                    else
+                                        input.form-control(type='text' name="opcion_1" value=pregunta.opciones[0].frase)
+                                .form-check.mx-2
+                                    input.form-check-input(type='checkbox' name="result_1")
+                                    label.form-check-label opción correcta
+
+
+                            .mb-3.input-group
+                                if(pregunta.opciones.length == 0)
+                                    input.form-control(type='text' name="opcion_2" placeholder="opcion_2")
+                                else
+                                    if(pregunta.opciones[1].frase =='')
+                                        input.form-control(type='text' name="opcion_2" value=pregunta.opciones[1].frase class="border border-3 border-danger")
+                                    else
+                                        input.form-control(type='text' name="opcion_2" value=pregunta.opciones[1].frase)
+                                .form-check.mx-2
+                                    input.form-check-input(type='checkbox' name="result_2")
+                                    label.form-check-label opción correcta
+
+
+                            .mb-3.input-group
+                                if(pregunta.opciones.length == 0)
+                                    input.form-control(type='text' name="opcion_3" placeholder="opcion_3")
+                                else
+                                    if(pregunta.opciones[2].frase =='')
+                                        input.form-control(type='text' name="opcion_3" value=pregunta.opciones[2].frase class="border border-3 border-danger")
+                                    else
+                                        input.form-control(type='text' name="opcion_3" value=pregunta.opciones[2].frase)
+                                .form-check.mx-2
+                                    input.form-check-input(type='checkbox' name="result_3")
+                                    label.form-check-label opción correcta
+
+
+                            .mb-3.input-group
+                                if(pregunta.opciones.length == 0)
+                                    input.form-control(type='text' name="opcion_4" placeholder="opcion_4")
+                                else
+                                    if(pregunta.opciones[3].frase =='')
+                                        input.form-control(type='text' name="opcion_4" value=pregunta.opciones[3].frase class="border border-3 border-danger")
+                                    else
+                                        input.form-control(type='text' name="opcion_4" value=pregunta.opciones[3].frase)
+                                .form-check.mx-2
+                                    input.form-check-input(type='checkbox' name="result_4")
+                                    label.form-check-label opción correcta
+                            button.btn.btn-primary(type='submit') Crear
+    if(errors)
+            .row
+                .col-md-6.offset-md-3
+                    .card
+                        .card-header
+                            |Detalle
+                        .card-body 
+                            =errors
+
+    include ../includes/footer
